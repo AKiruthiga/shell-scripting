@@ -2,4 +2,4 @@
 welcome!
 hi
 
-echo 'hello'
+echo "hello"
