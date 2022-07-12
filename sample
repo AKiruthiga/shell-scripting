@@ -1,6 +1,6 @@
 #!bin/bash
 
-welcome!
-hi
+echo "welcome!"
+
 
 echo "hello"
