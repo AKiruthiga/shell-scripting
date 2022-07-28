@@ -4,6 +4,7 @@ set -e
 COMPONENT=MONGODB
 LOGFILE="/tmp/$COMPONENT.log"
 MONGODB_REPO="https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo"
+COMPONENT_REPO="https://github.com/stans-robot-project/mongodb/archive/main.zip"
 
 source components/common.sh
 
@@ -21,16 +22,20 @@ systemctl enable mongod &>> $LOGFILE
 systemctl start mongod &>> $LOGFILE
 stat $?
 
-echo -n "updating #COMPONENT listening address"
+echo -n "updating $COMPONENT listening address"
 sed -i -e 's/127.0.0.0/0.0.0.0/' /etc/mongod.conf
 stat $?
 
-# vim /etc/mongod.conf
-# systemctl restart mongod
-# curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/mongodb/archive/main.zip"
+echo -n "Downloading $COMPONENT schema"
+curl -s -L -o /tmp/mongodb.zip "$COMPONENT_REPO"
+stat $?
 
-# cd /tmp
-# unzip mongodb.zip
-# cd mongodb-main
-# mongo < catalogue.js
-# mongo < users.js
+cd /tmp
+echo -n "extracting the schema:"
+unzip mongodb.zip &>> $LOGFILE
+stat $?
+
+cd mongodb-main
+echo -n "injecting the schema"
+mongo < catalogue.js &>> $LOGFILE
+mongo < users.js &>> $LOGFILE
