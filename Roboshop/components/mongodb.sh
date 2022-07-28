@@ -21,6 +21,10 @@ systemctl enable mongod &>> $LOGFILE
 systemctl start mongod &>> $LOGFILE
 stat $?
 
+echo -n "updating #COMPONENT listening address"
+sed -i -e 's/127.0.0.0/0.0.0.0/' /etc/mongod.conf
+stat $?
+
 # vim /etc/mongod.conf
 # systemctl restart mongod
 # curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/mongodb/archive/main.zip"
