@@ -39,3 +39,4 @@ cd mongodb-main
 echo -n "injecting the schema"
 mongo < catalogue.js &>> $LOGFILE
 mongo < users.js &>> $LOGFILE
+stat $?
