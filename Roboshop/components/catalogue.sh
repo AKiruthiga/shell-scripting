@@ -20,6 +20,13 @@ stat $?
 
 echo -n "downloading $COMPONENT repo:"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip" &>> $LOGFILE
+stat $?
+
+echo -n "Performing cleanup:"
+cd /home/roboshop &&  rm -rf ${COMPONENT} &>> $LOGFILE
+STAT $?
+
+echo -n "Extracting $COMPONENT:"
 cd /home/roboshop
 unzip -o /tmp/catalogue.zip &>> $LOGFILE
 mv catalogue-main catalogue
