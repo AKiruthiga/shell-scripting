@@ -3,6 +3,7 @@
 set -e
 COMPONENT=catalogue
 LOGFILE="/tmp/$COMPONENT.log"
+APPUSER="Roboshop"
 
 source components/common.sh
 
@@ -29,8 +30,9 @@ stat $?
 echo -n "Extracting $COMPONENT:"
 cd /home/roboshop
 unzip -o /tmp/catalogue.zip &>> $LOGFILE
-mv catalogue-main catalogue
-cd /home/roboshop/catalogue
+mv catalogue-main catalogue && chown -R $APPUSER:$APPUSERV $COMPONENT
+cd ${component}
+stat $?
 
 echo -n "installing $COMPONENT:"
 npm install &>> $LOGFILE
