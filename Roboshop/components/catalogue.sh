@@ -14,9 +14,14 @@ echo -n "installing Nodejs repo:"
 yum install nodejs -y &>> $LOGFILE
 stat $?
 
+<<<<<<< HEAD
 
 echo -n "creating the roboshop user:"
 id roboshop &>> $LOGFILE || useradd roboshop 
+=======
+echo -n "creating the roboshop user:"
+useradd roboshop 
+>>>>>>> a825289ef6b8966c4f443518558317608f62aecf
 stat $?
 
 echo -n "downloading $COMPONENT repo:"
@@ -44,4 +49,8 @@ stat $?
 # {"level":"info","time":1656660782066,"pid":12217,"hostname":"ip-172-31-13-123.ec2.internal","msg":"MongoDB connected","v":1}
 
 # # vim /etc/nginx/default.d/roboshop.conf
+<<<<<<< HEAD
 # # systemctl restart nginx
+=======
+# # systemctl restart nginx
+>>>>>>> a825289ef6b8966c4f443518558317608f62aecf
