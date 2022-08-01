@@ -21,7 +21,7 @@ stat $?
 echo -n "downloading $COMPONENT repo:"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip" &>> $LOGFILE
 cd /home/roboshop
-unzip /tmp/catalogue.zip &>> $LOGFILE
+unzip -o /tmp/catalogue.zip &>> $LOGFILE
 mv catalogue-main catalogue
 cd /home/roboshop/catalogue
 
