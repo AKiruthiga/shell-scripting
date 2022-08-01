@@ -24,7 +24,7 @@ stat $?
 
 echo -n "Performing cleanup:"
 cd /home/roboshop &&  rm -rf ${COMPONENT} &>> $LOGFILE
-STAT $?
+stat $?
 
 echo -n "Extracting $COMPONENT:"
 cd /home/roboshop
