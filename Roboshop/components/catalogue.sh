@@ -35,8 +35,20 @@ cd ${component}
 stat $?
 
 echo -n "installing $COMPONENT:"
-cd /home/roboshop/$COMPONENT
+cd /home/roboshop/$COMPONENT/
 npm install &>> $LOGFILE
+stat $?
+
+echo -n "Configuring $COMPONENT service:"
+sed -i -e 's/MONGO_DNSNAME/mongodb.robocopy.internal/' systemd.service
+mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+stat $?
+
+echo -n "starting $COMPONENT service:"
+systemctl daemon-reload
+systemctl start catalogue
+systemctl enable catalogue &>> $LOGFILE
+systemctl status catalogue -l &>> $LOGFILE
 stat $?
 
 #vim systemd.servce
