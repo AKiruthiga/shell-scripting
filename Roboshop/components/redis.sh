@@ -7,11 +7,11 @@ APPUSER="roboshop"
 
 source components/common.sh
 
-echo -n "configuring the $component repo:"
+echo -n "configuring the $COMPONENT repo:"
 curl -L https://raw.githubusercontent.com/stans-robot-project/$COMPONENT/main/$COMPONENT.repo -o /etc/yum.repos.d/redis.repo
 stat $?
 
-echo -n "Installing $component "
+echo -n "Installing $COMPONENT"
 yum install redis-6.2.7 -y &>> $LOGFILE
 stat $?
 
