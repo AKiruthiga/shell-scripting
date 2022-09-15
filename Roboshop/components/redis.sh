@@ -8,7 +8,7 @@ APPUSER="roboshop"
 source components/common.sh
 
 echo -n "configuring the $COMPONENT repo:"
-curl -L https://raw.githubusercontent.com/stans-robot-project/$COMPONENT/main/$COMPONENT.repo -o /etc/yum.repos.d/redis.repo
+curl -L https://raw.githubusercontent.com/stans-robot-project/$COMPONENT/main/$COMPONENT.repo -o /etc/yum.repos.d/redis.repo &>> $LOGFILE
 stat $?
 
 echo -n "Installing $COMPONENT"
