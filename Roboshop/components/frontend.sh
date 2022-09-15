@@ -6,6 +6,8 @@ LOGFILE="/tmp/$COMPONENT.log"
 source components/common.sh
 
 
+echo "echo thest"
+
 echo -n "installing the nginx:"
 yum install nginx -y &>> $LOGFILE
 stat $?
