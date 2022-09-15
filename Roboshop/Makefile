@@ -9,3 +9,7 @@ catalogue:
 
 cart:
 	sh components/cart.sh 
+
+redis:
+	sh components/redis.sh 
+
