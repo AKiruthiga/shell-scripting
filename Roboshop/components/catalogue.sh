@@ -7,49 +7,9 @@ APPUSER="roboshop"
 
 source components/common.sh
 
-echo -n "configuring Nodejs repo:"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> $LOGFILE
-stat $?
+#calling NODEJS function
 
-echo -n "installing Nodejs repo:"
-yum install nodejs -y &>> $LOGFILE
-stat $?
-
-echo -n "creating the roboshop user:"
-id roboshop &>> $LOGFILE || useradd roboshop 
-stat $?
-
-echo -n "downloading $COMPONENT repo:"
-curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip" &>> $LOGFILE
-stat $?
-
-echo -n "Performing cleanup:"
-cd /home/roboshop &&  rm -rf ${COMPONENT} &>> $LOGFILE
-stat $?
-
-echo -n "Extracting $COMPONENT:"
-cd /home/roboshop
-unzip -o /tmp/catalogue.zip &>> $LOGFILE
-mv catalogue-main catalogue && chown -R $APPUSER:$APPUSER $COMPONENT
-cd ${component}
-stat $?
-
-echo -n "installing $COMPONENT:"
-cd /home/roboshop/$COMPONENT/
-npm install &>> $LOGFILE
-stat $?
-
-echo -n "Configuring $COMPONENT service:"
-sed -i -e 's/MONGO_DNSNAME/mongodb.robocopy.internal/' systemd.service
-mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-stat $?
-
-echo -n "starting $COMPONENT service:"
-systemctl daemon-reload
-systemctl start catalogue
-systemctl enable catalogue &>> $LOGFILE
-systemctl status catalogue -l &>> $LOGFILE
-stat $?
+NODEJS
 
 #vim systemd.servce
 # # mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
