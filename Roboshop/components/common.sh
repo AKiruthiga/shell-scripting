@@ -58,7 +58,7 @@ DOWNLOAD_AND_EXTRACT(){
     echo -n "Extracting $COMPONENT:"
     cd /home/roboshop
     unzip -o /tmp/${component}.zip &>> $LOGFILE
-    mv ${component}-main ${component} && chown -R $APPUSER:$APPUSER $COMPONENT
+    mv ${component}-main ${component} && chown -R $APPUSER:$APPUSER ${COMPONENT}
     cd ${component}
     stat $?
 }
@@ -66,7 +66,7 @@ DOWNLOAD_AND_EXTRACT(){
 CONFIG_SERVICE(){
     echo -n "Configuring $COMPONENT service:"
     sed -i -e 's/REDIS_ENDPOINT/redis.robocopy.internal/' -e 's/MONGO_ENDPOINT/mongodb.robocopy.internal/' -e 's/MONGO_DNSNAME/mongodb.robocopy.internal/' systemd.service
-    mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
+    mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/${COMPONENT}.service
     stat $?
 }
 
