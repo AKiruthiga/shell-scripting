@@ -48,7 +48,7 @@ CREATE_USER(){
 
 DOWNLOAD_AND_EXTRACT(){
     echo -n "downloading $COMPONENT repo:"
-    curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip" &>> $LOGFILE
+    curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip" &>> $LOGFILE
     stat $?
 
     echo -n "Performing cleanup:"
@@ -57,8 +57,8 @@ DOWNLOAD_AND_EXTRACT(){
 
     echo -n "Extracting $COMPONENT:"
     cd /home/roboshop
-    unzip -o /tmp/catalogue.zip &>> $LOGFILE
-    mv catalogue-main catalogue && chown -R $APPUSER:$APPUSER $COMPONENT
+    unzip -o /tmp/$COMPONENT.zip &>> $LOGFILE
+    mv $COMPONENT-main $COMPONENT && chown -R $APPUSER:$APPUSER $COMPONENT
     cd ${component}
     stat $?
 }
@@ -66,7 +66,7 @@ DOWNLOAD_AND_EXTRACT(){
 CONFIG_SERVICE(){
     echo -n "Configuring $COMPONENT service:"
     sed -i -e 's/REDIS_ENDPOINT/redis.robocopy.internal/' -e 's/MONGO_ENDPOINT/mongodb.robocopy.internal/' -e 's/MONGO_DNSNAME/mongodb.robocopy.internal/' systemd.service
-    mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+    mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
     stat $?
 }
 
