@@ -48,7 +48,7 @@ CREATE_USER(){
 
 DOWNLOAD_AND_EXTRACT(){
     echo -n "downloading $COMPONENT repo:"
-    curl -s -L -o /tmp/${component}.zip "https://github.com/stans-robot-project/${component}/archive/main.zip" &>> $LOGFILE
+    curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip" &>> $LOGFILE
     stat $?
 
     echo -n "Performing cleanup:"
