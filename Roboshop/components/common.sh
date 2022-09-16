@@ -65,7 +65,7 @@ DOWNLOAD_AND_EXTRACT(){
 
 CONFIG_SERVICE(){
     echo -n "Configuring $COMPONENT service:"
-    sed -i -e 's/REDIS_ENDPOINT/redis.robocopy.internal/' -e 's/MONGO_ENDPOINT/mongodb.robocopy.internal/' -e 's/MONGO_DNSNAME/mongodb.robocopy.internal/' systemd.service
+    sed -i -e 's/CATALOGUE_ENDPOINT/redis.robocopy.internal/' -e 's/REDIS_ENDPOINT/redis.robocopy.internal/' -e 's/REDIS_ENDPOINT/redis.robocopy.internal/' -e 's/MONGO_ENDPOINT/mongodb.robocopy.internal/' -e 's/MONGO_DNSNAME/mongodb.robocopy.internal/' systemd.service
     mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/${COMPONENT}.service
     stat $?
 }
